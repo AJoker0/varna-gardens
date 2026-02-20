@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
   return (
@@ -7,9 +8,14 @@ export default function Header() {
         
         {/* Логотип */}
         <Link href="/" className="flex items-center gap-3 cursor-pointer">
-          <div className="w-12 h-12 bg-[#8cc63f] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-inner">
-            VG
-          </div>
+          <Image
+            src="/logo.jpg"
+            alt="Варненские Сады"
+            width={48}
+            height={48}
+            className="rounded-full object-cover shadow-inner"
+            priority
+          />
           <span className="font-extrabold text-xl tracking-tight text-gray-800 uppercase">
             Варненские <br /> <span className="text-[#8cc63f]">Сады</span>
           </span>
@@ -25,7 +31,6 @@ export default function Header() {
               ВЫБРАТЬ НЕДВИЖИМОСТЬ <span className="text-[10px]">▼</span>
             </span>
             
-            {/* Скрытый блок меню, который появляется при наведении (group-hover) */}
             <div className="absolute top-20 left-0 w-64 bg-[#8cc63f] text-white shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 rounded-b-lg overflow-hidden border-t border-white/20">
               <Link href="/#infrastructure" className="block px-6 py-4 hover:bg-[#7ab033] border-b border-white/20 transition-colors">
                 КВАРТИРЫ ПО ГЕНПЛАНУ
