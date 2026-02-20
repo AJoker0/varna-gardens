@@ -441,9 +441,13 @@ export interface ApiApartmentApartment extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    area: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    layoutImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -453,8 +457,66 @@ export interface ApiApartmentApartment extends Struct.CollectionTypeSchema {
     number: Schema.Attribute.String;
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    rooms: Schema.Attribute.Integer;
     statusFlat: Schema.Attribute.Enumeration<['available', 'sold', 'reserved']>;
     svgPolygon: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFloorFloor extends Struct.CollectionTypeSchema {
+  collectionName: 'floors';
+  info: {
+    displayName: 'Floor';
+    pluralName: 'floors';
+    singularName: 'floor';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    apartments: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::apartment.apartment'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    level: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::floor.floor'> &
+      Schema.Attribute.Private;
+    planImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLeadLead extends Struct.CollectionTypeSchema {
+  collectionName: 'leads';
+  info: {
+    displayName: 'Lead';
+    pluralName: 'leads';
+    singularName: 'lead';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    apartment: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::lead.lead'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -973,6 +1035,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::apartment.apartment': ApiApartmentApartment;
+      'api::floor.floor': ApiFloorFloor;
+      'api::lead.lead': ApiLeadLead;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

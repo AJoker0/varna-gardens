@@ -27,6 +27,22 @@
     },
     "svgPolygon": {
       "type": "text"
+    },
+    "area": {
+      "type": "decimal"
+    },
+    "rooms": {
+      "type": "integer"
+    },
+    "layoutImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

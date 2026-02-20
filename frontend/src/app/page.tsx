@@ -1,9 +1,16 @@
 import axios from 'axios';
+import Header from '@/components/Header';
+import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
 import InteractivePlan from '@/components/InteractivePlan';
+import AdvantagesSection from '@/components/AdvantagesSection';
+import FaqSection from '@/components/FaqSection';
+import ContactFooter from '@/components/ContactFooter';
+import InfrastructureMap from '@/components/InfrastructureMap';
 
-async function getApartments() {
+async function getFloorData() {
   try {
-    const res = await axios.get('http://127.0.0.1:1337/api/apartments');
+    const res = await axios.get('http://127.0.0.1:1337/api/floors?populate=*');
     return res.data.data;
   } catch (error) {
     console.error("Ошибка сети:", error);
@@ -12,43 +19,65 @@ async function getApartments() {
 }
 
 export default async function Home() {
-  const rawApartments = await getApartments();
+  const floors = await getFloorData();
+  
+  let floorLevel = "—";
+  let imageUrl = "";
+  let apartmentsForPlan = [];
 
-  // Подготавливаем данные для компонента
-  // Подготавливаем данные для компонента
-  const apartmentsForPlan = rawApartments.map((apt: any) => {
-    const data = apt.attributes || apt;
+  if (floors && floors.length > 0) {
+    const firstFloor = floors[0];
+    floorLevel = firstFloor.level;
+    imageUrl = firstFloor.planImage?.url || "";
+    if (imageUrl.startsWith('/')) {
+      imageUrl = `http://127.0.0.1:1337${imageUrl}`;
+    }
     
-    // ВАЖНО: Выведем данные в консоль терминала, чтобы точно видеть, 
-    // как Strapi присылает названия полей (помогает при дебаге)
-    console.log("Данные квартиры:", data); 
-
-    return {
+    const rawApartments = firstFloor.apartments || [];
+    apartmentsForPlan = rawApartments.map((apt: any) => ({
       id: apt.documentId || apt.id,
-      number: data.number,
-      
-      // ИСПРАВЛЕНИЕ 1: Меняем status на statusflat 
-      // (или statusFlat, посмотри в консоли терминала, как точно написано)
-      status: data.statusFlat, 
-      
-      price: data.price,
-      
-      // ИСПРАВЛЕНИЕ 2: Убираем хардкод и берем координаты из базы
-      svgPolygon: data.svgPolygon || "" 
-    };
-  });
+      number: apt.number,
+      status: apt.statusFlat, 
+      price: apt.price,
+      svgPolygon: apt.svgPolygon || ""
+    }));
+  }
 
   return (
-    <main className="min-h-screen bg-gray-50 p-10 font-sans">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-extrabold mb-2 text-gray-900 tracking-tight">
-          ЖК "Солнечный город"
-        </h1>
-        <p className="text-gray-500 mb-8">Секция 1 • Выбор на этаже</p>
-        
-        {/* Рендерим наш изолированный компонент */}
-        <InteractivePlan apartments={apartmentsForPlan} />
-      </div>
+    // Убираем отсюда padding, чтобы Hero секция заняла весь экран
+    <main className="font-sans bg-gray-50 min-h-screen">
+      
+      {/* 1. Навигация */}
+      <Header />
+
+      {/* 2. Главный экран */}
+      <HeroSection />
+
+      {/* 3. О микрорайоне */}
+      <AboutSection />
+
+      {/* НОВЫЙ БЛОК: Интерактивный генплан */}
+      <InfrastructureMap />
+
+      {/* 4. Выбор недвижимости (Наш интерактивный план) */}
+      <section id="plan" className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+             <h2 className="text-4xl font-bold text-gray-800 mb-4">Выбор недвижимости</h2>
+             <p className="text-gray-500">Секция 1 • Выбор на этаже {floorLevel}</p>
+          </div>
+          
+          {apartmentsForPlan.length > 0 ? (
+            <InteractivePlan apartments={apartmentsForPlan} imageUrl={imageUrl} />
+          ) : (
+            <div className="text-center p-10 bg-white rounded-xl shadow">Данные этажа не найдены в Strapi.</div>
+          )}
+        </div>
+      </section>
+      <AdvantagesSection />
+      <FaqSection />
+      <ContactFooter />
+
     </main>
   );
 }
