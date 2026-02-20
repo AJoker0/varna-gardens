@@ -10,7 +10,7 @@ import InfrastructureMap from '@/components/InfrastructureMap';
 
 async function getFloorData() {
   try {
-    const res = await axios.get('http://127.0.0.1:1337/api/floors?populate=*');
+    const res = await axios.get('https://varna-gardens-production.up.railway.app/api/floors?populate=*');
     return res.data.data;
   } catch (error) {
     console.error("Ошибка сети:", error);
@@ -30,7 +30,7 @@ export default async function Home() {
     floorLevel = firstFloor.level;
     imageUrl = firstFloor.planImage?.url || "";
     if (imageUrl.startsWith('/')) {
-      imageUrl = `http://127.0.0.1:1337${imageUrl}`;
+      imageUrl = `https://varna-gardens-production.up.railway.app${imageUrl}`;
     }
     
     const rawApartments = firstFloor.apartments || [];

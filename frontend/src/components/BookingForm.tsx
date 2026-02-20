@@ -20,7 +20,7 @@ export default function BookingForm({ apartmentNumber }: Props) {
         setStatus('loading');
 
         try {
-            await axios.post('http://127.0.0.1:1337/api/leads', {
+            await axios.post('https://varna-gardens-production.up.railway.app/api/leads', {
                 data: {
                     name: name, 
                     phone: phone,

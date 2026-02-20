@@ -4,7 +4,7 @@ import BookingForm from '@/components/BookingForm';
 
 async function getApartmentData(id: string) {
   try {
-    const res = await axios.get(`http://127.0.0.1:1337/api/apartments?filters[documentId][$eq]=${id}&populate=*`);
+    const res = await axios.get(`https://varna-gardens-production.up.railway.app/api/apartments?filters[documentId][$eq]=${id}&populate=*`);
     
     const apartments = res.data.data;
     if (apartments && apartments.length > 0) {
@@ -31,7 +31,7 @@ export default async function ApartmentPage({ params }: { params: Promise<{ id: 
 
   let imageUrl = data.layoutImage?.url || "";
   if (imageUrl.startsWith('/')) {
-    imageUrl = `http://127.0.0.1:1337${imageUrl}`;
+    imageUrl = `https://varna-gardens-production.up.railway.app${imageUrl}`;
   }
 
   return (

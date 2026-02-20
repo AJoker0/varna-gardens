@@ -8,7 +8,7 @@ import FilterWrapper from '@/components/FilterWrapper';
 async function getAllApartments() {
   try {
     // ИСПРАВЛЕНИЕ: Меняем сложный populate на универсальный ?populate=*
-    const res = await axios.get('http://127.0.0.1:1337/api/apartments?populate=*');
+    const res = await axios.get('https://varna-gardens-production.up.railway.app/api/apartments?populate=*');
     return res.data.data;
   } catch (error) {
     console.error("Ошибка при загрузке квартир:", error);
@@ -26,7 +26,7 @@ export default async function SearchPage() {
     // Формируем правильный путь к картинке планировки
     let imgUrl = data.layoutImage?.url || "";
     if (imgUrl.startsWith('/')) {
-      imgUrl = `http://127.0.0.1:1337${imgUrl}`;
+      imgUrl = `https://varna-gardens-production.up.railway.app${imgUrl}`;
     }
 
     return {
