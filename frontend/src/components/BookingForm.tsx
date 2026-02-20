@@ -81,7 +81,7 @@ export default function BookingForm({ apartmentNumber }: Props) {
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-400"
                       placeholder="Иван Иванов"
                     />
                   </div>
@@ -92,7 +92,7 @@ export default function BookingForm({ apartmentNumber }: Props) {
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-400"
                       placeholder="+38 (000) 000-00-00"
                     />
                   </div>

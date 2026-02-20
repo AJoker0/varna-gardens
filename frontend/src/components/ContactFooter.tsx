@@ -15,10 +15,10 @@ export default function ContactFooter() {
           </h2>
           <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input type="text" placeholder="Ваше имя*" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-6 py-4 outline-none focus:ring-2 focus:ring-[#8cc63f]" required />
-              <input type="tel" placeholder="Телефон*" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-6 py-4 outline-none focus:ring-2 focus:ring-[#8cc63f]" required />
+              <input type="text" placeholder="Ваше имя*" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-6 py-4 outline-none focus:ring-2 focus:ring-[#8cc63f] text-gray-900 placeholder-gray-400" required />
+              <input type="tel" placeholder="Телефон*" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-6 py-4 outline-none focus:ring-2 focus:ring-[#8cc63f] text-gray-900 placeholder-gray-400" required />
             </div>
-            <textarea placeholder="Ваш вопрос*" rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-6 py-4 outline-none focus:ring-2 focus:ring-[#8cc63f]" required></textarea>
+            <textarea placeholder="Ваш вопрос*" rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-6 py-4 outline-none focus:ring-2 focus:ring-[#8cc63f] text-gray-900 placeholder-gray-400" required></textarea>
             <button type="button" className="bg-[#8cc63f] hover:bg-[#7ab033] text-white font-bold uppercase tracking-wider py-4 px-12 rounded-full transition-transform hover:scale-105 shadow-lg">
               Отправить
             </button>

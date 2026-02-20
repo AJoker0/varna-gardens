@@ -6,9 +6,9 @@ export default function AboutSection() {
           <span className="text-[#8cc63f] text-4xl">🍃</span>
         </div>
         <h2 className="text-4xl font-bold text-gray-800 mb-10 flex items-center justify-center gap-4">
-          <span className="h-[2px] w-16 bg-[#8cc63f]"></span>
+          <span className="h-0.5 w-16 bg-[#8cc63f]"></span>
           Микрорайон «Таировские Сады»
-          <span className="h-[2px] w-16 bg-[#8cc63f]"></span>
+          <span className="h-0.5 w-16 bg-[#8cc63f]"></span>
         </h2>
         
         <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
