@@ -3,6 +3,8 @@ import Header from '@/components/Header';
 import ContactFooter from '@/components/ContactFooter';
 import FilterWrapper from '@/components/FilterWrapper';
 
+export const dynamic = 'force-dynamic';
+
 // Серверная функция для загрузки ВСЕХ квартир
 // Серверная функция для загрузки ВСЕХ квартир
 async function getAllApartments() {

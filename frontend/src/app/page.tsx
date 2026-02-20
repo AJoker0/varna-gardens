@@ -8,6 +8,8 @@ import FaqSection from '@/components/FaqSection';
 import ContactFooter from '@/components/ContactFooter';
 import InfrastructureMap from '@/components/InfrastructureMap';
 
+export const dynamic = 'force-dynamic';
+
 async function getFloorData() {
   try {
     const res = await axios.get('https://varna-gardens-production.up.railway.app/api/floors?populate=*');
